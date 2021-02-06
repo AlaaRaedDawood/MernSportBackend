@@ -18,13 +18,8 @@ const socketio = require('socket.io')
 const PORT = process.env.PORT || 8000
 
 const app = express()
-const corsConfig = {
-	origin: "https://mern-sport-frontend.herokuapp.com",
-	methods: ["GET", "POST"],
-	credentials: true
-  }
-app.use(cors(corsConfig));
-app.options('*', cors());
+app.use(cors());
+// app.options('*', cors());
 
 const server = http.Server(app)
 const io = socketio(server,
