@@ -47,7 +47,7 @@ io.on('connection', socket => {
 	connectUsers[user] = socket.id
     // console.log(connectUsers);
 })
-app.use(cors())
+
 app.use((req, res, next) => {
 	req.io = io
 	req.connectUsers = connectUsers
@@ -58,7 +58,7 @@ app.use((req, res, next) => {
 
 	return next()
 })
-
+app.use(cors())
 app.use(express.json())
 app.use("/files", express.static(path.resolve(__dirname, "..", "files")))
 app.use(routes);
