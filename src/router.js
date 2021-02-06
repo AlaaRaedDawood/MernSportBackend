@@ -40,7 +40,7 @@ routes.get('/event/:eventID' , verifytoken ,  DashBoardController.getEventById);
 routes.get('/dashboardUserId' , verifytoken ,DashBoardController.getEventByUserId);
 
 //events
-routes.post('/event/createEvent' , verifytoken ,upload.single("thumbnail") ,EventController.createEvent);
+routes.post('/event/createEvent' , verifytoken ,EventController.createEvent);
 routes.delete('/events/:eventID' ,verifytoken , EventController.deleteEvent);
 routes.delete('/eventsdelete' , EventController.deleteAllevents);
 //users
