@@ -19,14 +19,15 @@ const PORT = process.env.PORT || 8000
 
 const app = express()
 const server = http.Server(app)
-const io = socketio(server,
-{
-	cors: {
-	  origin: "https://mern-sport-frontend.herokuapp.com",
-	  methods: ["GET", "POST"],
-	  credentials: true
-	}
-  });
+// const io = socketio(server,
+// {
+// 	cors: {
+// 	  origin: "https://mern-sport-frontend.herokuapp.com",
+// 	  methods: ["GET", "POST"],
+// 	  credentials: true
+// 	}
+//   });
+const io = socketio(server)
 
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config()
@@ -51,15 +52,11 @@ io.on('connection', socket => {
 app.use((req, res, next) => {
 	req.io = io
 	req.connectUsers = connectUsers
-	// res.setHeader('Access-Control-Allow-Origin', 'https://mern-sport-frontend.herokuapp.com');
-    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    // res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    // res.setHeader('Access-Control-Allow-Credentials', true);
 
 	return next()
 })
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 app.use("/files", express.static(path.resolve(__dirname, "..", "files")))
 app.use(routes);
 
