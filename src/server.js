@@ -18,6 +18,9 @@ const socketio = require('socket.io')
 const PORT = process.env.PORT || 8000
 
 const app = express()
+app.use(cors());
+app.options('*', cors());
+
 const server = http.Server(app)
 const io = socketio(server,
 {
@@ -55,12 +58,7 @@ app.use((req, res, next) => {
 	return next()
 })
 
-const corsConfig = {
-	origin: 'https://mern-sport-frontend.herokuapp.com',
-	credentials: true
-  };
-  app.use(cors(corsConfig));
-  app.options("*", cors(corsConfig));
+
 app.use(express.json());
 app.use("/files", express.static(path.resolve(__dirname, "..", "files")))
 app.use(routes);
