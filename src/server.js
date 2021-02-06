@@ -19,15 +19,14 @@ const PORT = process.env.PORT || 8000
 
 const app = express()
 const server = http.Server(app)
-// const io = socketio(server,
-// {
-// 	cors: {
-// 	  origin: "https://mern-sport-frontend.herokuapp.com",
-// 	  methods: ["GET", "POST"],
-// 	  credentials: true
-// 	}
-//   });
-const io = socketio(server)
+const io = socketio(server,
+{
+	cors: {
+	  origin: "https://mern-sport-frontend.herokuapp.com",
+	  methods: ["GET", "POST"],
+	  credentials: true
+	}
+  });
 
 if (process.env.NODE_ENV !== 'production') {
 	require('dotenv').config()
