@@ -22,7 +22,7 @@ const server = http.Server(app)
 const io = socketio(server,
 {
 	cors: {
-	  origin: "https://mern-sport-frontend.herokuapp.com/",
+	  origin: "https://mern-sport-frontend.herokuapp.com",
 	  methods: ["GET", "POST"],
 	  credentials: true
 	}
