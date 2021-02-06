@@ -51,14 +51,16 @@ io.on('connection', socket => {
 app.use((req, res, next) => {
 	req.io = io
 	req.connectUsers = connectUsers
-	res.header("Access-Control-Allow-Origin", '*');
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-    next();
-	//return next()
+    
+	return next()
 })
-app.use(cors());
+
+const corsConfig = {
+	origin: 'https://mern-sport-frontend.herokuapp.com',
+	credentials: true
+  };
+  app.use(cors(corsConfig));
+  app.options("*", cors(corsConfig));
 app.use(express.json());
 app.use("/files", express.static(path.resolve(__dirname, "..", "files")))
 app.use(routes);
