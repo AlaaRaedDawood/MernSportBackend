@@ -47,16 +47,18 @@ io.on('connection', socket => {
 	connectUsers[user] = socket.id
     // console.log(connectUsers);
 })
-
+app.use(cors())
 app.use((req, res, next) => {
 	req.io = io
 	req.connectUsers = connectUsers
-	// res.header("Access-Control-Allow-Origin", "*");
-	// res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-	// console.log("i am here ");
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
 	return next()
 })
-app.use(cors())
+
 app.use(express.json())
 app.use("/files", express.static(path.resolve(__dirname, "..", "files")))
 app.use(routes);
