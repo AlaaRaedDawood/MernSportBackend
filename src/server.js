@@ -10,7 +10,7 @@
 
 const express = require('express')
 const mongoose = require('mongoose')
-const cors = require('cors')
+const cors = require('cors');
 const routes = require('./router')
 const path = require('path')
 const http = require('http')
@@ -51,7 +51,7 @@ app.use(cors())
 app.use((req, res, next) => {
 	req.io = io
 	req.connectUsers = connectUsers
-	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8888');
+	res.setHeader('Access-Control-Allow-Origin', 'https://mern-sport-frontend.herokuapp.com');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
